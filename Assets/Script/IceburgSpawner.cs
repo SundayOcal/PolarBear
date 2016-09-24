@@ -9,6 +9,7 @@ public class IceburgSpawner : MonoBehaviour {
 	public GameObject emptyIceburgMock;
 	float spawnDistance = 5;
 	float spawnZRange = 8;
+	float spawnZDeadRange = 2;
 	public float SpawnDistance {
 		get { return spawnDistance; }
 	}
@@ -36,7 +37,8 @@ public class IceburgSpawner : MonoBehaviour {
 
 	void SpawnInitialIce() {
 		TryCreateNewIce ();
-		foreach( int _ in Enumerable.Range( 0, 7 ) ) {
+		int initialSpawnCount = 20;
+		foreach( int _ in Enumerable.Range( 0, initialSpawnCount ) ) {
 			transform.position += new Vector3(spawnDistance, 0, 0);
 			TryCreateNewIce ();
 		}
@@ -44,11 +46,17 @@ public class IceburgSpawner : MonoBehaviour {
 
 	GameObject CreateNewIce() {
 		float zFix = Random.Range (-spawnZRange / 2 , spawnZRange / 2);
+		// Avoid dead range in the middle.
+		if (Mathf.Abs (zFix) < spawnZDeadRange / 2) {
+			zFix += zFix > 0 ? spawnZDeadRange / 2 : -spawnZDeadRange / 2;
+		}
 
 		GameObject newIce = 
 			(GameObject)Instantiate(iceburgMock, 
 				new Vector3(transform.position.x, spawnYpos, transform.position.z + zFix),
 				Quaternion.identity);
+		
+
 		return newIce;
 	}
 

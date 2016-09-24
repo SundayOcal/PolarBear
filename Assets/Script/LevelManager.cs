@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
+		SetLevel1 ();
 	}
 
 	void Start() {
@@ -32,6 +33,6 @@ public class LevelManager : MonoBehaviour {
 	void SetLevel1() {
 		iceMeltTimeSec = 5;
 		spawnInterval = 0.5f;
-		iceSpawnPossibility = 0.5f;
+		iceSpawnPossibility = 1f;
 	}
 }

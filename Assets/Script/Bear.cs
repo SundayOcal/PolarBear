@@ -24,7 +24,8 @@ public class Bear : MonoBehaviour {
 	}
 
 	void Start () {
-		JumpOver (startingPlace);
+		if (startingPlace)
+			JumpOver (startingPlace);
 	}
 	
 	// Update is called once per frame
