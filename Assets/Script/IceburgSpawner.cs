@@ -7,7 +7,8 @@ public class IceburgSpawner : MonoBehaviour {
 	public static IceburgSpawner instance;
 	public GameObject iceburgMock;
 	public GameObject emptyIceburgMock;
-	float spawnDistance = 2;
+	float spawnDistance = 5;
+	float spawnZRange = 8;
 	public float SpawnDistance {
 		get { return spawnDistance; }
 	}
@@ -25,6 +26,11 @@ public class IceburgSpawner : MonoBehaviour {
 
 	void Start () {
 		spawnYpos = transform.position.y;
+
+		Vector3 tmp = transform.position;
+		tmp.x = Bear.instance.transform.position.x + spawnDistance;
+		transform.position = tmp;
+
 		SpawnInitialIce ();
 	}
 
@@ -37,9 +43,11 @@ public class IceburgSpawner : MonoBehaviour {
 	}
 
 	GameObject CreateNewIce() {
+		float zFix = Random.Range (-spawnZRange / 2 , spawnZRange / 2);
+
 		GameObject newIce = 
 			(GameObject)Instantiate(iceburgMock, 
-				new Vector3(transform.position.x, spawnYpos, transform.position.z),
+				new Vector3(transform.position.x, spawnYpos, transform.position.z + zFix),
 				Quaternion.identity);
 		return newIce;
 	}
@@ -54,9 +62,8 @@ public class IceburgSpawner : MonoBehaviour {
 
 	GameObject TryCreateNewIce() {
 		GameObject newIceburg;
-		float possib = Random.Range (0.0f, 1.0f);
 		if (spawnSkipped ||
-			possib <= LevelManager.instance.IceSpawnPossibility) {
+			Random.Range (0.0f, 1.0f) <= LevelManager.instance.IceSpawnPossibility) {
 			spawnSkipped = false;
 			newIceburg = CreateNewIce ();
 		} else {

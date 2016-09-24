@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour {
 	
 	}
 
+	public void FinishGame() {
+		isGameLive = false;
+	}
+
 	public void BearJump() {
 		if (!isGameLive) 
 			return;
@@ -28,8 +32,8 @@ public class GameManager : MonoBehaviour {
 			Bear.instance.JumpOver (obj.gameObject);
 			stage.MoveStep ();
 		}
-		if (!obj.GetComponent<Iceburg> ()) {
-			isGameLive = false;
+		if (obj.tag == "Hidden") {
+			FinishGame ();
 		}
 	}
 
@@ -38,14 +42,15 @@ public class GameManager : MonoBehaviour {
 			return;
 
 		GameObject obj = IceburgWatcher.instance.GetNextIceburg ();
-		if (obj.GetComponent<Iceburg> ()) {
-			isGameLive = false;
+		if (obj.tag != "Hidden") {
+			FinishGame ();
 			return;
 		}
 		Bear.instance.JumpOver (obj.gameObject);
 		stage.MoveStep ();
 
 		obj = IceburgWatcher.instance.GetNextIceburg ();
+		Debug.Assert (obj.tag != "Hidden");
 		Bear.instance.JumpOver (obj.gameObject);
 		stage.MoveStep ();
 	}
