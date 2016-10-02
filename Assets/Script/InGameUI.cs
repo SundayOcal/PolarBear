@@ -13,8 +13,8 @@ public class InGameUI : MonoBehaviour {
 	}
 
 	void Awake () {
-		score = transform.FindChild ("labelCount/Text").GetComponent<Text>();
-		best = transform.FindChild ("labelBest/Text").GetComponent<Text>();
+		score = transform.FindChild ("imgScore/Text").GetComponent<Text>();
+		best = transform.FindChild ("imgBest/Text").GetComponent<Text>();
 		panGameOver = transform.FindChild ("panGameOver").gameObject;
 	}
 	
