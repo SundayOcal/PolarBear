@@ -10,4 +10,11 @@ public class Stage : MonoBehaviour {
 
 		IceburgSpawner.instance.SpawnIce ();
 	}
+
+	void OnTriggerEnter(Collider other) {
+		print (other);
+		if (other.GetComponent<Bear> ()) {
+			GameManager.instance.FinishGame ();
+		}
+	}
 }

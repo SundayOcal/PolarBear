@@ -12,9 +12,10 @@ public class InputManager : MonoBehaviour {
 	void Update () {
 		if (Input.GetMouseButtonDown (0)) {
 			if (Input.mousePosition.x < Screen.width / 2) {
-				GameManager.instance.BearJump ();
+				print (Input.mousePosition.x);
+				GameManager.instance.BearJumpLeft ();
 			} else {
-				GameManager.instance.BearLongJump ();
+				GameManager.instance.BearJumpRight ();
 			}
 		}
 	}

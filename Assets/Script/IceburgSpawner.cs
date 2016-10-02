@@ -55,7 +55,7 @@ public class IceburgSpawner : MonoBehaviour {
 			(GameObject)Instantiate(iceburgMock, 
 				new Vector3(transform.position.x, spawnYpos, transform.position.z + zFix),
 				Quaternion.identity);
-		
+		newIce.tag = zFix > 0 ? "left" : "right";
 
 		return newIce;
 	}

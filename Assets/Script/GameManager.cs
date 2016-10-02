@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance;
@@ -7,7 +8,7 @@ public class GameManager : MonoBehaviour {
 	public Stage stage;
 
 	void Awake () {
-		instance = this;	
+		instance = this;
 	}
 
 	void Start () {
@@ -16,42 +17,56 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	public void FinishGame() {
 		isGameLive = false;
 	}
 
-	public void BearJump() {
+	public void RestartGame() {
+		SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+	}
+
+	public void BearJumpLeft() {
 		if (!isGameLive) 
 			return;
 		
 		GameObject obj = IceburgWatcher.instance.GetNextIceburg ();
-		if (obj) {
-			Bear.instance.JumpOver (obj.gameObject);
-			stage.MoveStep ();
+		if (obj.tag != "left") {
+			FinishGame ();
+			return;
 		}
 		if (obj.tag == "Hidden") {
 			FinishGame ();
+			return;
+		}
+
+		if (obj) {
+			Bear.instance.JumpOver (obj.gameObject);
+			stage.MoveStep ();
+			ScoreManager.instance.AddTab ();
 		}
 	}
 
-	public void BearLongJump() {
-		if (!isGameLive) 
+	public void BearJumpRight() {
+		if (!isGameLive)
 			return;
 
 		GameObject obj = IceburgWatcher.instance.GetNextIceburg ();
-		if (obj.tag != "Hidden") {
+		if (obj.tag != "right") {
 			FinishGame ();
 			return;
 		}
-		Bear.instance.JumpOver (obj.gameObject);
-		stage.MoveStep ();
+		if (obj.tag == "Hidden") {
+			FinishGame ();
+			return;
+		}
 
-		obj = IceburgWatcher.instance.GetNextIceburg ();
-		Debug.Assert (obj.tag != "Hidden");
-		Bear.instance.JumpOver (obj.gameObject);
-		stage.MoveStep ();
+		if (obj) {
+			Bear.instance.JumpOver (obj.gameObject);
+			stage.MoveStep ();
+			ScoreManager.instance.AddTab ();
+		}
 	}
 }
