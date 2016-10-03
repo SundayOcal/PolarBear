@@ -10,13 +10,5 @@ public class InputManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown (0)) {
-			if (Input.mousePosition.x < Screen.width / 2) {
-				print (Input.mousePosition.x);
-				GameManager.instance.BearJumpLeft ();
-			} else {
-				GameManager.instance.BearJumpRight ();
-			}
-		}
 	}
 }

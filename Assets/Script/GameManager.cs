@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour {
 		SceneManager.LoadScene (SceneManager.GetActiveScene().name);
 	}
 
+	public void TogglePauseGame() {
+		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+	}
+
 	public void BearJumpLeft() {
 		if (!isGameLive) 
 			return;

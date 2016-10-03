@@ -5,7 +5,7 @@ using System.Linq;
 
 public class IceburgSpawner : MonoBehaviour {
 	public static IceburgSpawner instance;
-	public GameObject iceburgMock;
+	public GameObject[] iceburgMocks;
 	public GameObject emptyIceburgMock;
 	float spawnDistance = 5;
 	float spawnZRange = 8;
@@ -51,8 +51,10 @@ public class IceburgSpawner : MonoBehaviour {
 			zFix += zFix > 0 ? spawnZDeadRange / 2 : -spawnZDeadRange / 2;
 		}
 
+		int selectType = Random.Range (0, iceburgMocks.Count() - 1);
+
 		GameObject newIce = 
-			(GameObject)Instantiate(iceburgMock, 
+			(GameObject)Instantiate(iceburgMocks[selectType], 
 				new Vector3(transform.position.x, spawnYpos, transform.position.z + zFix),
 				Quaternion.identity);
 		newIce.tag = zFix > 0 ? "left" : "right";

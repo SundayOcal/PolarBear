@@ -12,6 +12,18 @@ public class InGameUI : MonoBehaviour {
 		GameManager.instance.RestartGame ();
 	}
 
+	public void OnBtnPause() {
+		GameManager.instance.TogglePauseGame ();
+	}
+
+	public void OnBtnLeft() {
+		GameManager.instance.BearJumpLeft ();
+	}
+
+	public void OnBtnRight() {
+		GameManager.instance.BearJumpRight ();
+	}
+
 	void Awake () {
 		score = transform.FindChild ("imgScore/Text").GetComponent<Text>();
 		best = transform.FindChild ("imgBest/Text").GetComponent<Text>();
