@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Bear : MonoBehaviour {
 	public static Bear instance;
+	Animator animator;
 
 	public GameObject startingPlace;
 	Iceburg currentIceburg = null;
@@ -17,10 +18,14 @@ public class Bear : MonoBehaviour {
 		currentIceburg = other.GetComponent<Iceburg> ();
 		if (currentIceburg)
 			currentIceburg.melt = true;
+		animator.Play ("Jump");
 	}
 
 	void Awake() {
 		instance = this;
+		animator = GetComponent<Animator> ();
+		print ("Awake");
+		print (animator);
 	}
 
 	void Start () {

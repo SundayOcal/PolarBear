@@ -9,6 +9,7 @@ public class Iceburg : MonoBehaviour {
 	int screenWith = 14;
 	int screenWithFix = -1; // to melt ice early
 	float initialScale = 1;
+	float minimumScale = 0.2f;
 
 	public float MoveMeterPerSec() {
 		return (screenWith + screenWithFix) / LevelManager.instance.IceMeltTimeSec;
@@ -30,9 +31,9 @@ public class Iceburg : MonoBehaviour {
 
 	void MeltPerFrame() {
 		float shrink = Time.deltaTime * MeltScalePerSec();
-		transform.localScale += new Vector3 (0, -shrink, 0);
+		transform.localScale += new Vector3 (-shrink, -shrink, 0);
 
-		if (transform.localScale.y <= 0) {
+		if (transform.localScale.y <= minimumScale) {
 			Destroy (this.gameObject);
 		}
 	}
