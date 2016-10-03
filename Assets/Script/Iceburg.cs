@@ -9,14 +9,14 @@ public class Iceburg : MonoBehaviour {
 	int screenWith = 14;
 	int screenWithFix = -1; // to melt ice early
 	float initialScale = 1;
-	float minScale = 2.5f;
+	float minScale = 3f;
 
 	public float MoveMeterPerSec() {
 		return (screenWith + screenWithFix) / LevelManager.instance.IceMeltTimeSec;
 	}
 
 	void Start () {
-		initialScale = transform.localScale.y;
+		initialScale = transform.localScale.x;
 		initialScale += initialScaleFix;
 	}
 
