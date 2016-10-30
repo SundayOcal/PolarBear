@@ -33,6 +33,6 @@ public class LevelManager : MonoBehaviour {
 	void SetLevel1() {
 		iceMeltTimeSec = 5;
 		spawnInterval = 0.5f;
-		iceSpawnPossibility = 1f;
+		iceSpawnPossibility = 0.8f;
 	}
 }

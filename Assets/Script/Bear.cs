@@ -29,6 +29,14 @@ public class Bear : MonoBehaviour {
 
 	}
 
+	public void Run () {
+		animator.Play ("Run");
+
+		float moveDist = 4;
+		transform.DOMove (transform.position + new Vector3 (moveDist, 0, 0), 0.5f)
+			.SetEase (Ease.Linear);
+	}
+
 	void Awake() {
 		instance = this;
 		animator = GetComponent<Animator> ();

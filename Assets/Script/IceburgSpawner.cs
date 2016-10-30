@@ -6,14 +6,12 @@ using System.Linq;
 public class IceburgSpawner : MonoBehaviour {
 	public static IceburgSpawner instance;
 	public GameObject[] iceburgMocks;
-	public GameObject emptyIceburgMock;
+	public GameObject obstacleMock;
 	float spawnDistance = 5;
 	float spawnZRange = 8;
-	float spawnZDeadRange = 2;
 	public float SpawnDistance {
 		get { return spawnDistance; }
 	}
-	float timeDelta = 0;
 	bool spawnSkipped = false;
 	float spawnYpos;
 
@@ -46,25 +44,20 @@ public class IceburgSpawner : MonoBehaviour {
 
 	GameObject CreateNewIce() {
 		float zFix = Random.Range (-spawnZRange / 2 , spawnZRange / 2);
-		// Avoid dead range in the middle.
-		if (Mathf.Abs (zFix) < spawnZDeadRange / 2) {
-			zFix += zFix > 0 ? spawnZDeadRange / 2 : -spawnZDeadRange / 2;
-		}
 
-		int selectType = Random.Range (0, iceburgMocks.Count() - 1);
+		int selectType = Random.Range (0, iceburgMocks.Count());
 
 		GameObject newIce = 
 			(GameObject)Instantiate(iceburgMocks[selectType], 
 				new Vector3(transform.position.x, spawnYpos, transform.position.z + zFix),
 				Quaternion.identity);
-		newIce.tag = zFix > 0 ? "left" : "right";
 
 		return newIce;
 	}
 
 	GameObject CreateEmptyIce() {
 		GameObject emptyIce = 
-			(GameObject)Instantiate(emptyIceburgMock, 
+			(GameObject)Instantiate(obstacleMock, 
 				new Vector3(transform.position.x, spawnYpos, transform.position.z),
 				Quaternion.identity);
 		return emptyIce;
@@ -84,14 +77,6 @@ public class IceburgSpawner : MonoBehaviour {
 		IceburgWatcher.instance.WatchIceburg (newIceburg);
 		return newIceburg;
 	}
-	/*
-	void CreateNewIcePerFrame() {
-		timeDelta += Time.deltaTime;
-		if (timeDelta >= LevelManager.instance.SpawnInterval) {
-			TryCreateNewIce ();
-			timeDelta = 0;
-		}
-	}*/
 	
 	// Update is called once per frame
 	void Update () {

@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance;
-	public bool isGameLive = false;
+	public bool isGameFinished = true;
+	public bool inFinishingAction = false;
 	public Stage stage;
 
 	void Awake () {
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
-		isGameLive = true;
+		isGameFinished = false;
 	}
 	
 	// Update is called once per frame
@@ -20,8 +21,18 @@ public class GameManager : MonoBehaviour {
 
 	}
 
+	bool IsGameLive() {
+		return !inFinishingAction && !isGameFinished;
+	}
+
+	IEnumerator FinishingAction() {
+		inFinishingAction = true;
+		yield return new WaitForSeconds (1);
+		isGameFinished = true;
+	}
+
 	public void FinishGame() {
-		isGameLive = false;
+		StartCoroutine (FinishingAction());
 	}
 
 	public void RestartGame() {
@@ -32,20 +43,14 @@ public class GameManager : MonoBehaviour {
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 	}
 
-	public void BearJumpLeft() {
-		if (!isGameLive) 
+	public void BearJump() {
+		if (!IsGameLive()) 
 			return;
 		
 		GameObject obj = IceburgWatcher.instance.GetNextIceburg ();
-		if (obj.tag != "left") {
-			FinishGame ();
-			return;
-		}
 		if (obj.tag == "Hidden") {
 			FinishGame ();
-			return;
 		}
-
 		if (obj) {
 			Bear.instance.JumpOver (obj.gameObject);
 			stage.MoveStep ();
@@ -53,24 +58,26 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void BearJumpRight() {
-		if (!isGameLive)
+	public void BearLongJump() {
+		if (!IsGameLive()) 
 			return;
 
 		GameObject obj = IceburgWatcher.instance.GetNextIceburg ();
-		if (obj.tag != "right") {
-			FinishGame ();
-			return;
-		}
+		obj = IceburgWatcher.instance.GetNextIceburg ();
 		if (obj.tag == "Hidden") {
 			FinishGame ();
-			return;
 		}
-
 		if (obj) {
 			Bear.instance.JumpOver (obj.gameObject);
 			stage.MoveStep ();
 			ScoreManager.instance.AddTab ();
 		}
+	}
+
+	public void BearRun() {
+		if (IsGameLive())
+			return;
+
+		Bear.instance.Run ();
 	}
 }

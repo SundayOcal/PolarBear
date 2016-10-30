@@ -17,11 +17,11 @@ public class InGameUI : MonoBehaviour {
 	}
 
 	public void OnBtnLeft() {
-		GameManager.instance.BearJumpLeft ();
+		GameManager.instance.BearLongJump ();
 	}
 
 	public void OnBtnRight() {
-		GameManager.instance.BearJumpRight ();
+		GameManager.instance.BearJump ();
 	}
 
 	void Awake () {
@@ -35,7 +35,7 @@ public class InGameUI : MonoBehaviour {
 		score.text = ScoreManager.instance.Score.ToString ();
 		best.text = ScoreManager.instance.Best.ToString ();
 
-		if (!GameManager.instance.isGameLive) {
+		if (GameManager.instance.isGameFinished) {
 			panGameOver.SetActive (true);
 		}
 	}
