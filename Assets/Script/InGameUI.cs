@@ -12,6 +12,11 @@ public class InGameUI : MonoBehaviour {
 		GameManager.instance.RestartGame ();
 	}
 
+	public void OnBtnHome() {
+		print ("Home");
+		GameManager.instance.GoHome ();
+	}
+
 	public void OnBtnPause() {
 		GameManager.instance.TogglePauseGame ();
 	}

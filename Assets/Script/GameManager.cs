@@ -39,6 +39,10 @@ public class GameManager : MonoBehaviour {
 		SceneManager.LoadScene (SceneManager.GetActiveScene().name);
 	}
 
+	public void GoHome() {
+		SceneManager.LoadScene ("Home");
+	}
+
 	public void TogglePauseGame() {
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 	}
