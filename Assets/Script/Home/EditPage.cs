@@ -3,34 +3,30 @@ using System.Collections;
 using DG.Tweening;
 
 public class EditPage : MonoBehaviour {
+    //public Transform cubeA;
     static public EditPage instance;
     public void SetInstance()
     {
         instance = this; //자아라는 것을 알게 됨
         gameObject.SetActive(false); // true : 게임을 열고 있음.
     }
-    void OnEnable()
-    {
-        GameObject UI = transform.FindChild("UI").gameObject;
-        //자식 중에서 찾기
-        UI.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-        UI.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutExpo);
-        //0.3f -> 속도
-    }
 
     // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void OnEnable()
+    {
+        DOTween.Init(false, true, LogBehaviour.ErrorsOnly);
+        transform.localScale = new Vector3(0.1f, 0.1f,0.1f);
+        //transform.DOMove(new Vector3(-2, 2, 0), 1).SetRelative().SetLoops(-1, LoopType.Yoyo); //무한대, yoyo 타입/
+        transform.DOScale(1, 0.2f).SetEase(Ease.OutCirc);
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 
     public void Init()
     {
-        print("Init");
         gameObject.SetActive(true);
     }
 

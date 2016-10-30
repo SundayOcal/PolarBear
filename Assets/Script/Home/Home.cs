@@ -12,7 +12,6 @@ public class Home : MonoBehaviour {
 
     public void MessageOpenEditPage()
     {
-        print("MessageOpenEditPage");
         EditPage.instance.Init();
     }
 
