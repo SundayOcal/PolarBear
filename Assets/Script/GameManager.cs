@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator FinishingAction() {
 		inFinishingAction = true;
+		ScoreManager.instance.Save ();
 		yield return new WaitForSeconds (1);
 		isGameFinished = true;
 	}

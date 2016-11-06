@@ -20,11 +20,16 @@ public class ScoreManager : MonoBehaviour {
 		}
 	}
 
+	public void Save () {
+		PlayerPrefs.SetInt ("best", best);
+	}
+
 	void Awake() {
 		instance = this;
 	}
 
 	void Start () {
 		score = 0;
+		best = PlayerPrefs.GetInt ("best");
 	}
 }
