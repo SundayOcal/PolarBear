@@ -16,6 +16,7 @@ public class Bear : MonoBehaviour {
 
 	public void JumpOver (GameObject other) {
 		print (other);
+
 		float topOffset = BoundaryInfo.Height (other) / 2;
 
 		transform.DOMove (other.transform.position + new Vector3 (0, jumpHeight, 0), 1f)
@@ -25,8 +26,10 @@ public class Bear : MonoBehaviour {
 		if (currentIceburg)
 			currentIceburg.melt = true;
 		animator.Play ("Jump");
+	}
 
-
+	public void ReadyJump (GameObject other) {
+		transform.LookAt (other.transform);
 	}
 
 	public void Run () {
@@ -45,8 +48,9 @@ public class Bear : MonoBehaviour {
 	}
 
 	void Start () {
-		if (startingPlace)
+		if (startingPlace) {
 			JumpOver (startingPlace);
+		}
 	}
 	
 	// Update is called once per frame

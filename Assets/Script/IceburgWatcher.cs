@@ -23,6 +23,14 @@ public class IceburgWatcher : MonoBehaviour {
 		}
 	}
 
+	public GameObject PeekNextIceburg() {
+		if (watchingIceburgs.Count > 0) {
+			return watchingIceburgs [0];
+		} else {
+			return null;
+		}
+	}
+
 	public void WatchIceburg(GameObject iceburg) {
 		watchingIceburgs.Add (iceburg);
 	}

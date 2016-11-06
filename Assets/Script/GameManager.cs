@@ -56,7 +56,9 @@ public class GameManager : MonoBehaviour {
 			FinishGame ();
 		}
 		if (obj) {
+			Bear.instance.ReadyJump (obj);
 			Bear.instance.JumpOver (obj.gameObject);
+
 			stage.MoveStep ();
 			ScoreManager.instance.AddTab ();
 		}
@@ -67,12 +69,16 @@ public class GameManager : MonoBehaviour {
 			return;
 
 		GameObject obj = IceburgWatcher.instance.GetNextIceburg ();
+		// get next 
 		obj = IceburgWatcher.instance.GetNextIceburg ();
 		if (obj.tag == "Hidden") {
 			FinishGame ();
 		}
 		if (obj) {
+			Bear.instance.ReadyJump (obj);
 			Bear.instance.JumpOver (obj.gameObject);
+
+			stage.MoveStep ();
 			stage.MoveStep ();
 			ScoreManager.instance.AddTab ();
 		}
