@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour {
 	int score = 0;
 	static int best = 0;
 
-	public void AddTab() {
+	public void AddJumpScore() {
 		score += 1;
 		if (best < score) {
 			best = score;

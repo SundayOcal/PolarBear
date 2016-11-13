@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour {
 				IceburgWatcher.instance.PeekNextIceburg ());
 
 			stage.MoveStep ();
-			ScoreManager.instance.AddTab ();
+			ScoreManager.instance.AddJumpScore ();
 		}
 	}
 
@@ -83,7 +83,8 @@ public class GameManager : MonoBehaviour {
 
 			stage.MoveStep ();
 			stage.MoveStep ();
-			ScoreManager.instance.AddTab ();
+			ScoreManager.instance.AddJumpScore ();
+			ScoreManager.instance.AddJumpScore ();
 		}
 	}
 
