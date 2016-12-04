@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour {
 	public float IceSpawnPossibility {
 		get { return iceSpawnPossibility; }
 	}
+	public float FishSpawnPossibility { get; set; }
 
 	void Awake() {
 		instance = this;
@@ -34,5 +35,6 @@ public class LevelManager : MonoBehaviour {
 		iceMeltTimeSec = 2;
 		spawnInterval = 0.5f;
 		iceSpawnPossibility = 0.8f;
+		FishSpawnPossibility = 0.3f;
 	}
 }
