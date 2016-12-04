@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour {
 		if (obj) {
 			Bear.instance.ReadyJump (obj);
 			Bear.instance.JumpOver (obj.gameObject,
-				IceburgWatcher.instance.PeekNextIceburg ());
+				IceburgWatcher.instance.PeekNextIceburg (), 1);
 
 			stage.MoveStep ();
 			ScoreManager.instance.AddJumpScore ();
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour {
 		if (obj) {
 			Bear.instance.ReadyJump (obj);
 			Bear.instance.JumpOver (obj.gameObject,
-				IceburgWatcher.instance.PeekNextIceburg ());
+				IceburgWatcher.instance.PeekNextIceburg (), 2);
 
 			stage.MoveStep ();
 			stage.MoveStep ();

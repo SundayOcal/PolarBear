@@ -11,15 +11,15 @@ public class Bear : MonoBehaviour {
 	public Iceburg CurrentIceburg {
 		get { return currentIceburg; }
 	}
+		
+	float bearHeight = 0;
 
-	float jumpHeight = 0.8f;
+	public void JumpOver (GameObject other, GameObject lookAt = null, float jumpPower = 1) {
+		float topOffset = (BoundaryInfo.Height (other) / 2f) + (bearHeight / 2f) ;
+		Vector3 dest = other.transform.position + new Vector3 (0, topOffset, 0);
+		print ("Jump to " + other + " " + dest);
 
-	public void JumpOver (GameObject other, GameObject lookAt = null) {
-		print (other);
-
-		//float topOffset = BoundaryInfo.Height (other) / 2;
-
-		transform.DOMove (other.transform.position + new Vector3 (0, jumpHeight, 0), 1f)
+		transform.DOJump (dest, jumpPower, 1, 1f)
 			.SetEase (Ease.OutQuart).OnComplete (() => {
 				if (lookAt)
 					transform.LookAt (lookAt.transform);
@@ -46,6 +46,7 @@ public class Bear : MonoBehaviour {
 	void Awake() {
 		instance = this;
 		animator = GetComponent<Animator> ();
+		bearHeight = BoundaryInfo.Height (this.gameObject) / 2;
 		print ("Awake");
 		print (animator);
 	}

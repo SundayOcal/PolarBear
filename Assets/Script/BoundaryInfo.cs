@@ -3,9 +3,9 @@ using System.Collections;
 
 public class BoundaryInfo {
 	public static float Height(GameObject obj) {
-		BoxCollider collider = obj.GetComponentInChildren<BoxCollider> ();
-		if (collider) {
-			return obj.GetComponentInChildren<BoxCollider> ().size.y * obj.transform.localScale.y;
+		Renderer rend = obj.GetComponentInChildren<Renderer>();
+		if (rend) {
+			return rend.bounds.size.y;
 		} else {
 			return obj.transform.localScale.y;
 		}
