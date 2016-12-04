@@ -17,7 +17,7 @@ public class Bear : MonoBehaviour {
 	public void JumpOver (GameObject other, GameObject lookAt = null) {
 		print (other);
 
-		float topOffset = BoundaryInfo.Height (other) / 2;
+		//float topOffset = BoundaryInfo.Height (other) / 2;
 
 		transform.DOMove (other.transform.position + new Vector3 (0, jumpHeight, 0), 1f)
 			.SetEase (Ease.OutQuart).OnComplete (() => {
