@@ -19,6 +19,7 @@ public class Bear : MonoBehaviour {
 		Vector3 dest = other.transform.position + new Vector3 (0, topOffset, 0);
 		print ("Jump to " + other + " " + dest);
 
+		transform.DOKill (true); // Stop current movement.
 		transform.DOJump (dest, jumpPower, 1, 1f)
 			.SetEase (Ease.OutQuart).OnComplete (() => {
 				if (lookAt)
