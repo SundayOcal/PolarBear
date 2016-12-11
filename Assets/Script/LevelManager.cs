@@ -35,6 +35,6 @@ public class LevelManager : MonoBehaviour {
 		iceMeltTimeSec = 2;
 		spawnInterval = 0.5f;
 		iceSpawnPossibility = 0.8f;
-		FishSpawnPossibility = 0.3f;
+		FishSpawnPossibility = 0.8f;
 	}
 }

@@ -3,6 +3,8 @@ using System.Collections;
 using DG.Tweening;
 
 public class FlyingFish : MonoBehaviour {
+	public bool isFreeze = false;
+	public int FlyCount { get; set; }
 	GameObject fishObj;
 	const float kFlyingHeight = 3f;
 	const float kFlyingTime = 0.4f;
@@ -21,6 +23,9 @@ public class FlyingFish : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (isFreeze)
+			return;
+		
 		timeHasDelayed += Time.deltaTime;
 		if (timeHasDelayed >= jumpInterval) {
 			Jump ();
@@ -42,6 +47,10 @@ public class FlyingFish : MonoBehaviour {
 			.OnComplete (() => {
 				this.Reset();
 				this.transform.position += jumpDistance;
+				FlyCount -= 1;
+				if (FlyCount == 0) {
+					Destroy(this.gameObject);
+				}
 		});
 	}
 
@@ -60,8 +69,9 @@ public class FlyingFish : MonoBehaviour {
 
 	void InitializeMovingSetting() {
 		// Get move destination vector
-		fishObj = transform.FindChild ("FishObj").gameObject;
+		fishObj = transform.FindChild ("BlueMarlin").gameObject;
 		destinationVec = fishObj.transform.localPosition * -1;
 		jumpDistance = destinationVec - fishObj.transform.localPosition;
+		FlyCount = -1;
 	}
 }

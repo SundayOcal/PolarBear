@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class Stage : MonoBehaviour {
-	public GameObject flyingFishMock;
-
+	
 	public void MoveStep () {
 		Vector3 temp = transform.position;
 		temp.x += IceburgSpawner.instance.SpawnDistance;
@@ -18,4 +17,5 @@ public class Stage : MonoBehaviour {
 			GameManager.instance.FinishGame ();
 		}
 	}
+
 }
