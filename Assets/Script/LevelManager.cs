@@ -3,19 +3,11 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 	public static LevelManager instance;
-	float iceMeltTimeSec = 0;
-	public float IceMeltTimeSec {
-		get { return iceMeltTimeSec; }
-	}
-	float spawnInterval = 1;
-	public float SpawnInterval {
-		get { return spawnInterval; }
-	}
-	float iceSpawnPossibility = 1;
-	public float IceSpawnPossibility {
-		get { return iceSpawnPossibility; }
-	}
+	public float IceMeltTimeSec { get; set; }
+	public float IceSpawnPossibility { get; set; }
 	public float FishSpawnPossibility { get; set; }
+	public float FishFlyingTime { get; set; }
+	public float FishFlyingInterval { get; set; }
 
 	void Awake() {
 		instance = this;
@@ -32,9 +24,10 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	void SetLevel1() {
-		iceMeltTimeSec = 2;
-		spawnInterval = 0.5f;
-		iceSpawnPossibility = 0.8f;
+		IceMeltTimeSec = 2;
+		IceSpawnPossibility = 0.8f;
 		FishSpawnPossibility = 0.8f;
+		FishFlyingTime = 0.5f;
+		FishFlyingInterval = 0.6f;
 	}
 }

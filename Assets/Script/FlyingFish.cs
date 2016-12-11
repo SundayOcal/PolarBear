@@ -7,8 +7,6 @@ public class FlyingFish : MonoBehaviour {
 	public int FlyCount { get; set; }
 	GameObject fishObj;
 	const float kFlyingHeight = 3f;
-	const float kFlyingTime = 0.4f;
-	float jumpInterval = 0.5f;
 	Vector3 jumpDistance;
 	Vector3 destinationVec;
 	float timeHasDelayed = 0;
@@ -18,7 +16,7 @@ public class FlyingFish : MonoBehaviour {
 	}
 
 	void Start () {
-		timeHasDelayed = Random.Range(0, jumpInterval);
+		timeHasDelayed = Random.Range(0, LevelManager.instance.FishFlyingInterval);
 	}
 	
 	// Update is called once per frame
@@ -27,7 +25,7 @@ public class FlyingFish : MonoBehaviour {
 			return;
 		
 		timeHasDelayed += Time.deltaTime;
-		if (timeHasDelayed >= jumpInterval) {
+		if (timeHasDelayed >= LevelManager.instance.FishFlyingInterval) {
 			Jump ();
 			timeHasDelayed = 0;
 		}
@@ -43,7 +41,7 @@ public class FlyingFish : MonoBehaviour {
 	void Jump() {
 		SetRendererVisibility (true);
 		fishObj.transform.DOLookAt (transform.TransformPoint(destinationVec), 0.1f);
-		fishObj.transform.DOLocalJump (destinationVec, kFlyingHeight, 1, kFlyingTime)
+		fishObj.transform.DOLocalJump (destinationVec, kFlyingHeight, 1, LevelManager.instance.FishFlyingTime)
 			.OnComplete (() => {
 				this.Reset();
 				this.transform.position += jumpDistance;

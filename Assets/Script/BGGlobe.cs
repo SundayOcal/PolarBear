@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class BGGlobe : MonoBehaviour {
-	public GameObject iceburgMock;
-	float rotatePerSec = 0.1f;
+	float rotatePerSec = 0.3f;
 		
 	// Use this for initialization
 	void Start () {
@@ -11,8 +10,7 @@ public class BGGlobe : MonoBehaviour {
 	}
 
 	void RotatePerFrame() {
-		float iceburgMove = iceburgMock.GetComponent<Iceburg> ().MoveMeterPerSec ();
-		float rotate = Time.deltaTime * iceburgMove * rotatePerSec;
+		float rotate = Time.deltaTime * rotatePerSec;
 		transform.Rotate (new Vector3(0, -rotate, 0), Space.World);
 	}
 
