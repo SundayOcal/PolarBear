@@ -7,7 +7,7 @@ public class IceburgSpawner : MonoBehaviour {
 	public static IceburgSpawner instance;
 	public GameObject[] iceburgMocks;
 	public GameObject obstacleMock;
-	float spawnDistance = 5;
+	float spawnDistance = 10;
 	float spawnZRange = 8;
 	public float SpawnDistance {
 		get { return spawnDistance; }

@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour {
 	static int best = 0;
 
 	public void AddJumpScore() {
-		score += 1;
+		score += 5;
 		if (best < score) {
 			best = score;
 		}
