@@ -13,7 +13,7 @@ public class BtnAlarm : MonoBehaviour {
     Image bgimg, onoff;
     Transform beforeposx, afterposx;
     Text text;
-    bool isClick = true;
+    bool onButton = true;
 
     void Awake()
     {
@@ -29,17 +29,31 @@ public class BtnAlarm : MonoBehaviour {
 	}
     public void MyonClick()
     {
-        if (isClick)
-        {
+        if (!onButton)
+        { //알람 켜기
+            onoff.transform.DOMove(beforeposx.position, (float)0.2);
+            text.text = "ON";
+            EnableAlarm(true);
+            onButton = false;
+        }
+        else
+        { //알람 끄기
             onoff.transform.DOMove(afterposx.position, (float)0.2);
             text.text = "OFF";
-            isClick = false;
+            EnableAlarm(false);
+            onButton = true;
+        }
+    }
+    private void EnableAlarm(bool ison)
+    {
+        if(!ison)
+        {
+            print("알람 끄기");
+
         }
         else
         {
-            onoff.transform.DOMove(beforeposx.position, (float)0.2);
-            text.text = "ON";
-            isClick = true;
+            print("알람 실행");
         }
     }
 }

@@ -5,10 +5,17 @@ using DG.Tweening;
 
 public class BtnBGmusic : MonoBehaviour
 {
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
     Image bgimg, onoff;
     Transform beforeposx, afterposx;
     Text text;
-    bool isClick = true;
+    bool onButton = true;
+    AudioSource bgmusic;
 
     void Awake()
     {
@@ -17,11 +24,7 @@ public class BtnBGmusic : MonoBehaviour
         beforeposx = transform.FindChild("Beforeposx");
         afterposx = transform.FindChild("Afterposx");
         text = transform.FindChild("BGmusic_onoff").FindChild("Text").GetComponent<Text>();
-    }
-    // Use this for initialization
-    void Start()
-    {
-
+        bgmusic = GameObject.Find("SoundInspector").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,17 +34,35 @@ public class BtnBGmusic : MonoBehaviour
     }
     public void MyonClick()
     {
-        if (isClick)
-        {
-            onoff.transform.DOMove(afterposx.position,(float)0.2);
-            text.text = "OFF";
-            isClick = false;
-        }
-        else
+        if (!onButton)
         {
             onoff.transform.DOMove(beforeposx.position, (float)0.2);
             text.text = "ON";
-            isClick = true;
+            EnableAlarm(true);
+            onButton = true;
+        }
+        else
+        {
+            onoff.transform.DOMove(afterposx.position, (float)0.2);
+            text.text = "OFF";
+            EnableAlarm(false);
+            onButton = false;
+            print("음악켜기");
+        }
+    }
+    private void EnableAlarm(bool ison)
+    {
+        if (!ison)
+        {
+
+            print("알람 끄기");
+            bgmusic.volume = 0;
+
+        }
+        else
+        {
+            print("알람 실행");
+            bgmusic.volume = 1;
         }
     }
 }

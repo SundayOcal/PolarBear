@@ -33,12 +33,17 @@ public class BtnLanguage : MonoBehaviour {
             onoff.transform.DOMove(afterposx.position, (float)0.2);
             text.text = "OFF";
             isClick = false;
+            bgimg.color = new Color32(255,255,255,150);
+            onoff.color = new Color32(255,255,255,150);
+
         }
         else
         {
             onoff.transform.DOMove(beforeposx.position, (float)0.2);
             text.text = "ON";
             isClick = true;
+            bgimg.color = new Color32(255, 255, 255, 255);
+            onoff.color = new Color32(255, 255, 255, 255);
         }
     }
 }
