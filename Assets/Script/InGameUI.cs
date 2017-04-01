@@ -6,6 +6,7 @@ public class InGameUI : MonoBehaviour {
 	Text score;
 	Text best;
 	GameObject panGameOver;
+	GameObject panHelp;
 
 	public void OnBtnRestart() {
 		print ("restart");
@@ -29,10 +30,21 @@ public class InGameUI : MonoBehaviour {
 		GameManager.instance.BearJump ();
 	}
 
+	public void OnPanHelpClose() {
+		panHelp.SetActive (false);
+		OnBtnPause ();
+	}
+
+	public void OnPanHelpOpen() {
+		panHelp.SetActive (true);
+		OnBtnPause ();
+	}
+
 	void Awake () {
 		score = transform.FindChild ("imgScore/Text").GetComponent<Text>();
 		best = transform.FindChild ("imgBest/Text").GetComponent<Text>();
 		panGameOver = transform.FindChild ("panGameOver").gameObject;
+		panHelp = transform.FindChild ("panHelp").gameObject;
 	}
 	
 	// Update is called once per frame
